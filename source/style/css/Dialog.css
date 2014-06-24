@@ -1,0 +1,112 @@
+/*
+Put anything you reference with "url()" in ../../../assets/fonts/
+This way, you can minify your application, and just remove the "source" folder for production
+*/
+/* This kind of transition is too simple for our needs, as we might pass multiple properties to it
+@mixin transition ($type: all, $duration: 0.3s, $easing: ease-out, $delay: 0s) {
+    @include __transition ($type $duration $easing $delay);
+}
+*/
+/*
+    &:before, &:after {
+        @include clear();
+    }
+*/
+/*
+:hover, :focus, :active {
+    @extend ._hover;
+}
+*/
+/* ************************* */
+/* VARIABLES
+/* ************************* */
+/* WARNING: change this variable in styles.scss too */
+/* ************************* */
+/* DIALOG
+/* Based on App.js: https://github.com/kikinteractive/app
+/* ************************* */
+.dialog-container {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 340px;
+  background-color: transparent;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: background 0.425s cubic-bezier(0.4, 0.6, 0.05, 1), opacity 0.282s ease-in-out, visibility 0.425s ease-in-out;
+  -moz-transition: background 0.425s cubic-bezier(0.4, 0.6, 0.05, 1), opacity 0.282s ease-in-out, visibility 0.425s ease-in-out;
+  -ms-transition: background 0.425s cubic-bezier(0.4, 0.6, 0.05, 1), opacity 0.282s ease-in-out, visibility 0.425s ease-in-out;
+  -o-transition: background 0.425s cubic-bezier(0.4, 0.6, 0.05, 1), opacity 0.282s ease-in-out, visibility 0.425s ease-in-out;
+  transition: background 0.425s cubic-bezier(0.4, 0.6, 0.05, 1), opacity 0.282s ease-in-out, visibility 0.425s ease-in-out; }
+  .dialog-container .dialog {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-top: 1px solid #FFF;
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.85);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.85);
+    color: #777;
+    -webkit-transform: translateY(110%);
+    -moz-transform: translateY(110%);
+    -ms-transform: translateY(110%);
+    -o-transform: translateY(110%);
+    transform: translateY(110%);
+    /* Can't use include for this one since the property must have the prefix also */
+    -webkit-transition: -webkit-transform 0.425s cubic-bezier(0.4, 0.6, 0.05, 1);
+    transition: transform 0.425s cubic-bezier(0.4, 0.6, 0.05, 1); }
+    .dialog-container .dialog.dark {
+      background-color: rgba(51, 51, 50, 0.9);
+      border-top-color: #444;
+      color: #999; }
+    .dialog-container .dialog .title {
+      position: relative;
+      margin-bottom: 8px;
+      padding: 16px 20px 0;
+      font-size: 18px;
+      font-weight: 600;
+      text-align: center; }
+    .dialog-container .dialog .text {
+      margin-top: 8px;
+      padding: 0 20px 8px;
+      font-size: 16px;
+      font-weight: 400;
+      text-align: center; }
+    .dialog-container .dialog .button {
+      height: 60px;
+      color: #17B;
+      font-size: 22px;
+      font-weight: 300;
+      line-height: 60px;
+      text-align: center; }
+      .dialog-container .dialog .button.ok {
+        color: #3C7; }
+      .dialog-container .dialog .button.cancel {
+        color: #E54; }
+        body.isAndroid .dialog-container .dialog .button.cancel {
+          display: none; }
+      body.isDesktop .dialog-container .dialog .button:hover, body:not(.isDesktop) .dialog-container .dialog .button:active {
+        opacity: 0.5; }
+    .dialog-container .dialog.dark .button {
+      color: #F3F4F5; }
+  .dialog-container.show {
+    opacity: 1;
+    visibility: visible;
+    background-color: rgba(0, 0, 0, 0.8); }
+    .dialog-container.show .dialog {
+      -webkit-transform: translateY(0);
+      -moz-transform: translateY(0);
+      -ms-transform: translateY(0);
+      -o-transform: translateY(0);
+      transform: translateY(0); }
+  body.narrow .dialog-container {
+    min-width: 100%;
+    max-width: 100%; }

@@ -1,0 +1,281 @@
+/*
+Put anything you reference with "url()" in ../../../assets/fonts/
+This way, you can minify your application, and just remove the "source" folder for production
+*/
+
+@import "../../../lib/sass/sass-lib";
+
+
+/* ************************* */
+/* SHEET
+/* Based on App.js: https://github.com/kikinteractive/app
+/* ************************* */
+
+.sheet {
+    z-index: 10;
+    background: #e8eaef;
+    color: #eee;
+
+    h2 {
+        font-family: RalewayExtraBold, Sans-serif;
+        font-size: 30px;
+        font-weight: normal;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .app-section {
+        position: relative;
+        margin: 8px;
+        border: 1px solid #AAA;
+    }
+
+    .app-button {
+        margin: 0 auto;
+        height: 40px;
+        border-bottom: 1px solid #AAA;
+        line-height: 40px;
+        text-align: center;
+        color: #fff;
+        background: #444;
+
+        @include ellipsis;
+        @include transition (all 0.25s ease-out);
+
+        body.isDesktop &:hover,
+            body:not(.isDesktop) &:active {
+            background: #70aa3f;
+        }
+    }
+
+    .app-input {
+        position: relative;
+        display: block;
+        padding: 10px 12px;
+        width: 100%;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid #AAA;
+        outline: none;
+        border-radius: 0;
+        line-height: 20px;
+        -webkit-appearance: none;
+    }
+    .app-section .app-input:last-child {
+        border-bottom: none;
+    }
+    .app-input,
+    .app-input * {
+        color: #555;
+        font-family: inherit;
+        font-size: inherit;
+    }
+    input.app-input {
+        height: 40px;
+    }
+    textarea.app-input {
+        height: 80px;
+        resize: none;
+    }
+    .app-input input,
+    .app-input textarea {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        background-color: none;
+        border: none;
+        outline: none;
+        line-height: inherit;
+        resize: none;
+        -webkit-appearance: none;
+    }
+    .app-input input {
+        height: 20px;
+    }
+    .app-input textarea {
+        height: 60px;
+    }
+
+
+    input.app-input {
+        height: 44px;
+        background: #FFF;
+        line-height: 24px;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    body.isAndroid input.app-input {
+        height: 48px;
+        line-height: 18px;
+    }
+    .app-section input.app-input {
+        border-bottom: none;
+    }
+    body.isAndroid .app-section input.app-input {
+        height: 40px;
+        line-height: 20px;
+    }
+    .app-input[type="search"] {
+        padding-left: 34px;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACjElEQVR42r3Wz2sTQRjG8e2maW1rTYIoaPEgHqz/gD+KFi8VRb0pVPTi2UPNQRRCEHpQkCKIp0ilQg/BVqQKUi8q1lRzERQ0x3pQVKJIxTaxpql+DzkMD+xkNo1d+NBudt5535md3VnPdmQyGfP/FrSjC+trOhDxmnxo4k70I4lxzOA18riPYRzFFolvSvJBPMU8/los4w3S8JtRRCfGUZJEK3KuKiigV4pwHzl/43gYkLSKMhZRQsVsZ7T9jN1ShFPyCCahHVbwEiM4gyM4gRQe4Tu04DnskCLqFjACTf4Vg4gHxPo4gCfQ2HyY0e/BvIziIzY7LtgIpqC37YLrLIxJ8AK2SbBLIW+ln29ordfBdryXFZ2Eh7CLuBdVo4gyTmuhGjyA30byOexq5B2CKLIyC7fqBZ6V0U8jagkJ299jtHmWVXxJAsZq1xot4DD+GP3NYqOtgJQUkFllAQMoG/3l9WnSXS4p9yy7ys3suAzoOWK2gJMS8AKJBpP7uCj9PagXtBdFI+AH+mvXwhbQjbzslFfqPYYJ5OQ23IEPD2HeA6dkXyihz6WDFJblNTpkPN+BiWHO5E8ZyCvXytfhiwRXkZa2Qf0cRBG6F+yXWGsRhwL292nsRBei8NGKDmzCZePbQL1DPMw9TGJFR1IzgxtI4yqm8Av6LaDnOfSEmYlzWNKZCKJtAtrnEJcirNvqPnwK6tTyyfbM+F2vF9DmOhPmLfmABSzJVlvBIooYRQIeJiyFFlzXhJ73YQjXMYqbSOEYuqXtBtyTxLomtjrv8a7taswiJiy3bxYxr8mHLmYfWcua6JHQ5hcCP2BN3Eb7/8yva2LSSH4XsbVKbm5413AeCePamhYRRYv52z/AKK4/BRObOQAAAABJRU5ErkJggg==);
+        background-repeat: no-repeat;
+        background-position: 12px center;
+        -webkit-background-size: 16px 16px;
+        background-size: 16px 16px;
+    }
+    .app-input[type="search"].no-icon,
+    body.isAndroid .app-input[type="search"].no-icon-android,
+    body.isiOS .app-input[type="search"].no-icon-ios {
+        padding-left: 12px;
+        background-image: none;
+    }
+
+    .app-section,
+    .app-list > li,
+    .app-list > li.app-button,
+    /*.app-button,*/
+    .app-input {
+        border: none;
+    }
+
+    .app-section {
+        margin: 16px;
+        padding: 8px;
+        background: #FFF;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+        -webkit-border-radius: 6px;
+        border-radius: 6px;
+    }
+    .app-ios-7 .app-section {
+        border-bottom: none;
+    }
+    .app-section.app-button {
+        margin: 16px;
+        padding: 0;
+    }
+    p.app-section {
+        padding: 12px 16px;
+        color: #665;
+    }
+    .app-section > * {
+        margin: 8px 0 0;
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+    }
+    .app-section > :first-child {
+        margin-top: 0;
+    }
+}
+
+
+/* From: http://tympanus.net/Development/SectionSeparators/ */
+.diagonal-divider {
+    position: relative;
+    z-index: 1;
+    padding: 80px 10%;
+    color: #fff;
+    text-align: center;
+    background: #70aa3f;
+
+    &::before,
+    &::after {
+        position: absolute;
+        content: '';
+        pointer-events: none;
+        top: 0;
+        left: -25%;
+        z-index: -1;
+        width: 150%;
+        height: 75%;
+        background: inherit;
+        -webkit-transform: rotate(-2deg);
+        transform: rotate(-2deg);
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+    }
+
+    &::before {
+        height: 50%;
+        background: #5f9036;
+        -webkit-transform: rotate(-4deg);
+        transform: rotate(-4deg);
+        -webkit-transform-origin: 3% 0;
+        transform-origin: 3% 0;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .diagonal-divider {
+        &::before {
+            -webkit-transform: rotate(-3deg);
+            transform: rotate(-3deg);
+        }
+    }
+}
+
+
+/* From: http://tympanus.net/Development/CreativeLinkEffects/ */
+.welcome-title {
+    $height: 45px;
+
+    position: relative;
+    display: inline-block;
+    padding: 0 20px;
+    height: $height;
+    line-height: $height;
+    outline: none;
+
+    font-family: RalewayExtraBold, Sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+
+    &::before,
+    &::after {
+        pointer-events: none;
+        content: '';
+        position: absolute;
+        width: $height;
+        height: 2px;
+        background: #fff;
+        opacity: 0.2;
+
+        @include transition (all 0.3s);
+    }
+
+    &::before {
+        top: 0;
+        left: 0;
+
+        @include transform (rotate(90deg));
+        @include transform-origin (0 0);
+    }
+
+    &::after {
+        right: 0;
+        bottom: 0;
+
+        @include transform (rotate(90deg));
+        @include transform-origin (100% 0);
+    }
+
+    body.isDesktop &:hover,
+        body:not(.isDesktop) &:active {
+
+        &::before {
+            left: 50%;
+            opacity: 1;
+
+            @include transform (rotate(0deg) translateX(-50%));
+        }
+
+        &::after {
+            right: 50%;
+            opacity: 1;
+
+            @include transform (rotate(0deg) translateX(50%));
+        }
+    }
+}

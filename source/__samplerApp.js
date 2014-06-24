@@ -1,5 +1,7 @@
+var samplerBaseUrl = "http://enyojs.com/sampler/2.4.0/";
+
 enyo.kind({
-    name: "App",
+    name: "SamplerApp",
     classes: "app onyx font-lato enyo-unselectable",
     samples:[],
     handlers: {
@@ -84,7 +86,7 @@ enyo.kind({
 
                             {
                                 kind:"onyx.Icon",
-                                src:"assets/fiddle.png",
+                                src:samplerBaseUrl + "assets/fiddle.png",
                                 style:"margin-top:-5px;"
                             }
                             ]
@@ -112,7 +114,7 @@ enyo.kind({
 
                             {
                                 kind:"onyx.Icon",
-                                src:"assets/open-external.png",
+                                src:samplerBaseUrl + "assets/open-external.png",
                                 style:"margin-top:-5px;"
                             }
                             ]
@@ -157,7 +159,7 @@ enyo.kind({
             this.processSamples(this.preloadedManifest);
         } else {
             new enyo.Ajax({
-                url: "assets/manifest.json",
+                url: samplerBaseUrl + "assets/manifest.json",
                 mimeType: "application/json"
             })
             .response(this.bindSafely(function(inSender, inSamples) {
@@ -194,7 +196,7 @@ enyo.kind({
             // Load any additional sample manifests one-by-one
             var addManifest = this.addSamples.shift();
             new enyo.Ajax({
-                url: addManifest,
+                url: samplerBaseUrl + addManifest,
                 mimeType: "application/json"
             })
             .response(this.bindSafely(function(inSender, inSamples) {
@@ -398,7 +400,8 @@ enyo.kind({
             this.$.sourceViewer.resized();
         }
     },
-    navChanged: function() {
+    navChanged: function(inSender, inEvent) {
+        alert(inEvent.fromIndex + ' -> ' + inEvent.toIndex);
         // Update the namespace used for samples without an explicit namespace
         var curr = this.$.navPanels.getActive();
         if (curr && curr.samples && curr.samples.ns) {
@@ -651,7 +654,7 @@ enyo.kind({
         {
             kind: "onyx.IconButton",
             name: "srcCancelIcon",
-            src: "assets/cancel.png",
+            src: samplerBaseUrl + "assets/cancel.png",
             ontap: "doHideSampleSource"
         },
 
@@ -982,7 +985,7 @@ enyo.kind({
                         {
                             kind:"onyx.IconButton",
                             style:"width:32px;",
-                            src:"assets/remove-icon.png",
+                            src:samplerBaseUrl + "assets/remove-icon.png",
                             ontap:"removeManifest"
                         }
                         ]

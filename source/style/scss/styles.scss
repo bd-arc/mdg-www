@@ -4,7 +4,6 @@ This way, you can minify your application, and just remove the "source" folder f
 */
 
 @import "../../../lib/sass/sass-lib";
-@import "../../../lib/sass/sass-settings";
 
 
 /* ************************* */
@@ -19,6 +18,7 @@ $colorBlueLight: #2597d0;
 $colorBackgroundUltraLight: #fff;
 $colorBackgroundLight: #efeff4;
 
+/* WARNING: change this variable in styles.scss too */
 $widthLeftPanel: 340px;
 
 
@@ -32,9 +32,9 @@ $widthLeftPanel: 340px;
     font-family: 'FontAwesome';
     src: url('../../../assets/fonts/fontawesome-webfont.eot?v=4.0.3');
     src: url('../../../assets/fonts/fontawesome-webfont.eot?#iefix&v=4.0.3') format('embedded-opentype'),
-    url('../../../assets/fonts/fontawesome-webfont.woff?v=4.0.3') format('woff'),
-    url('../../../assets/fonts/fontawesome-webfont.ttf?v=4.0.3') format('truetype'),
-    url('../../../assets/fonts/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular') format('svg');
+        url('../../../assets/fonts/fontawesome-webfont.woff?v=4.0.3') format('woff'),
+        url('../../../assets/fonts/fontawesome-webfont.ttf?v=4.0.3') format('truetype'),
+        url('../../../assets/fonts/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -43,9 +43,9 @@ $widthLeftPanel: 340px;
     font-family: 'PixedenStroke';
     src: url('../../../assets/fonts/Pe-icon-7-stroke.eot?-2irksn');
     src: url('../../../assets/fonts/Pe-icon-7-stroke.eot?#iefix-2irksn') format('embedded-opentype'),
-    url('../../../assets/fonts/Pe-icon-7-stroke.woff?-2irksn') format('woff'),
-    url('../../../assets/fonts/Pe-icon-7-stroke.ttf?-2irksn') format('truetype'),
-    url('../../../assets/fonts/Pe-icon-7-stroke.svg?-2irksn#Pe-icon-7-stroke') format('svg');
+        url('../../../assets/fonts/Pe-icon-7-stroke.woff?-2irksn') format('woff'),
+        url('../../../assets/fonts/Pe-icon-7-stroke.ttf?-2irksn') format('truetype'),
+        url('../../../assets/fonts/Pe-icon-7-stroke.svg?-2irksn#Pe-icon-7-stroke') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -54,21 +54,31 @@ $widthLeftPanel: 340px;
     font-family: 'RalewayLight';
     src: url('../../../assets/fonts/raleway-light-webfont.eot');
     src: url('../../../assets/fonts/raleway-light-webfont.eot?#iefix') format('embedded-opentype'),
-    url('../../../assets/fonts/raleway-light-webfont.woff') format('woff'),
-    url('../../../assets/fonts/raleway-light-webfont.ttf') format('truetype'),
-    url('../../../assets/fonts/raleway-light-webfont.svg#ralewaylight') format('svg');
+        url('../../../assets/fonts/raleway-light-webfont.woff') format('woff'),
+        url('../../../assets/fonts/raleway-light-webfont.ttf') format('truetype'),
+        url('../../../assets/fonts/raleway-light-webfont.svg#ralewaylight') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'RalewayExtraBold';
+    src: url('../../../assets/fonts/raleway-extrabold-webfont.eot');
+    src: url('../../../assets/fonts/raleway-extrabold-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../../../assets/fonts/raleway-extrabold-webfont.woff') format('woff'),
+        url('../../../assets/fonts/raleway-extrabold-webfont.ttf') format('truetype'),
+        url('../../../assets/fonts/raleway-extrabold-webfont.svg#ralewaylight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
 @font-face {
     font-family: 'OswaldRegular';
     src: url('../../../assets/fonts/Oswald-Regular-webfont.eot');
     src: url('../../../assets/fonts/Oswald-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-    url('../../../assets/fonts/Oswald-Regular-webfont.woff') format('woff'),
-    url('../../../assets/fonts/Oswald-Regular-webfont.ttf') format('truetype'),
-    url('../../../assets/fonts/Oswald-Regular-webfont.svg#OswaldBook') format('svg');
+        url('../../../assets/fonts/Oswald-Regular-webfont.woff') format('woff'),
+        url('../../../assets/fonts/Oswald-Regular-webfont.ttf') format('truetype'),
+        url('../../../assets/fonts/Oswald-Regular-webfont.svg#OswaldBook') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -144,7 +154,7 @@ body,
 
 .panels > * {
     width: $widthLeftPanel;
-    background: $colorBackgroundUltraLight;
+    background: #1f1f1f;
 
     body.narrow & {
         min-width: 100%;
@@ -152,12 +162,13 @@ body,
     }
 
     &.mainview {
-        background-color: #fff;
-        background-image: url("http://pickcute.com/upload/img/beautiful-food-photography-corn-beans-and-onions-3467.jpg");
-        background-repeat: no-repeat;
+        background-image: url(http://subtlepatterns.com/patterns/dark_wood.png);
+        background-size: 256px 256px;
+        /*background-image: url("http://pickcute.com/upload/img/beautiful-food-photography-corn-beans-and-onions-3467.jpg");
+        background-repeat: repeat;
         background-position: center center;
         background-size: cover;
-        box-shadow: inset 4px 0px 4px rgba(0,0,0,0.3);
+        /*box-shadow: inset 4px 0px 4px rgba(0,0,0,0.3);*/
     }
 }
 
@@ -180,12 +191,11 @@ body,
         color: #1f1f1f;
 
         /*
-        -webkit-transition: all 0.25s ease-out;
-        transition: all 0.25s ease-out;
+        @include transition (all 0.25s ease-out);
         */
 
         body.isDesktop &:hover,
-        body:not(.isDesktop) &:active {
+            body:not(.isDesktop) &:active {
             color: $colorGreenMain;
         }
 
@@ -231,7 +241,7 @@ body,
             color: #fff;
 
             body.isDesktop &:hover,
-            body:not(.isDesktop) &:active {
+                body:not(.isDesktop) &:active {
                 color: #1f1f1f;
             }
 
@@ -253,10 +263,10 @@ body,
         color: #fff;
         background: $colorGreenMain;
 
-        transition: all 0.25s ease-out;
+        @include transition (all 0.25s ease-out);
 
         body.isDesktop &:hover,
-        body:not(.isDesktop) &:active {
+            body:not(.isDesktop) &:active {
             color: #1f1f1f;
         }
     }
@@ -264,47 +274,37 @@ body,
     .menu-item-wrapper {
         opacity: 0;
 
-        -webkit-transform: translateX(-150px);
-        transform: translateX(-150px);
-
-        -webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
-        transition: transform 0.4s, opacity 0.4s;
+        @include transform (translateX(-150px));
+        @include transition (-webkit-transform 0.4s ease-out, opacity 0.4s);
     }
 
     &.animate {
         .menu-item-wrapper {
             opacity: 1;
-            -webkit-transform: translateX(0);
-            transform: translateX(0);
+            @include transform (translateX(0));
 
             &:nth-child(1) {
-                -webkit-transition-delay: 0.05s;
-                transition-delay: 0.05s;
+                @include transition-delay (0.05s);
             }
 
             &:nth-child(2) {
-                -webkit-transition-delay: 0.1s;
-                transition-delay: 0.1s;
+                @include transition-delay (0.1s);
             }
 
             &:nth-child(3) {
-                -webkit-transition-delay: 0.15s;
-                transition-delay: 0.15s;
+                @include transition-delay (0.15s);
             }
 
             &:nth-child(4) {
-                -webkit-transition-delay: 0.2s;
-                transition-delay: 0.2s;
+                @include transition-delay (0.2s);
             }
 
             &:nth-child(5) {
-                -webkit-transition-delay: 0.25s;
-                transition-delay: 0.25s;
+                @include transition-delay (0.25s);
             }
 
             &:nth-child(6) {
-                -webkit-transition-delay: 0.3s;
-                transition-delay: 0.3s;
+                @include transition-delay (0.3s);
             }
         }
     }
@@ -320,6 +320,7 @@ body,
 .onyx-toolbar-inline {
     position: relative;
     z-index: 5;
+    min-height: 50px;
     padding: 15px;
     border: none;
 
@@ -330,19 +331,31 @@ body,
     > p {
         display: block;
         margin: 0;
-        padding: 0 80px;
+        padding: 0 56px;
 
-        font-size: 20px;
+        font-size: 17px;
         text-align: center;
         /*text-transform: uppercase;*/
         color: #fff;
 
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        @include ellipsis;
+
+        body.narrow &.animated {
+            opacity: 0;
+
+            @include transform (translateX(100px));
+
+            -webkit-transition: -webkit-transform 0.2s ease-out 0.15s, opacity 0.2s ease-out 0.15s;
+            transition: transform 0.2s ease-out 0.15s, opacity 0.2s ease-out 0.15s;
+
+            &.show {
+                opacity: 1;
+                @include transform (translateX(0));
+            }
+        }
     }
 
-    &.content-navbar {
+    body:not(.narrow) &.content-navbar {
         background: #5f9036;
     }
 }
@@ -352,17 +365,17 @@ body,
 
     cursor: pointer;
     position: absolute;
+    z-index: 1;
     display: inline-block;
     width: $btnMenuSize;
     height: $btnMenuSize;
-    top: 7px;
+    top: 6px;
     margin: 0;
     padding: 0;
     color: #fff;
     text-decoration: none;
 
-    -webkit-transition: all .25s ease-out;
-    transition: all .25s ease-out;
+    @include transition (all 0.25s ease-out);
 
     &::before {
         position: absolute;
@@ -376,6 +389,20 @@ body,
         font-size: 32px;
 
         -webkit-font-smoothing: antialiased;
+    }
+
+    &.animated {
+        opacity: 0;
+
+        @include transform (translateX(60px));
+
+        -webkit-transition: -webkit-transform 0.3s ease-out 0.15s, opacity 0.2s ease-out 0.05s;
+        transition: transform 0.3s ease-out 0.15s, opacity 0.2s ease-out 0.05s;
+
+        &.show {
+            opacity: 1;
+            @include transform (translateX(0));
+        }
     }
 
     &.btn-back {
@@ -428,7 +455,7 @@ body,
     }
 
     body.isDesktop &:hover,
-    body:not(.isDesktop) &:active {
+        body:not(.isDesktop) &:active {
         opacity: 0.6;
     }
 }
@@ -481,8 +508,8 @@ white-space: normal;
     vertical-align: top;
     position: relative;
     top: 0;
-    -webkit-transform: translate3d(0px, 0px, 0px);
-    transform: translate3d(0px, 0px, 0px);
+
+    @include transform (translate3d(0px, 0px, 0px));
 
     & > * {
         white-space: normal;
@@ -561,23 +588,23 @@ white-space: normal;
     }
 
     &.come-in {
-        transform: translateY(0);
-        transition: transform 0.8s ease-out;
+        @include transform (translateY(0));
+        @include transition (transform 0.8s ease-out);
     }
     &.come-in:nth-child(odd) {
-        transition-duration: 0.5s;
+        @include transition-duration (0.5s);
     }
 
     &.off-screen-top{
-        transform: translateY(-150px);
+        @include transform (translateY(-150px));
     }
     &.off-screen-bottom{
-        transform: translateY(150px);
+        @include transform (translateY(150px));
     }
 
     &.already-visible {
-        transform: translateY(0);
-        transition: none;
+        @include transform (translateY(0));
+        @include transition (none);
     }
 }
 
@@ -588,8 +615,7 @@ white-space: normal;
     max-width: 100%;
     font-size: 0;
 
-    -webkit-transition: all 0.25s ease-out;
-    transition: all 0.25s ease-out;
+    @include transition (all 0.25s ease-out);
 
     body:not(.isAndroid) & {
         background-color: #fff;
@@ -652,319 +678,132 @@ white-space: normal;
 
 
 /* ************************* */
-/* SHEET
-/* Based on App.js: https://github.com/kikinteractive/app
-/* ************************* */
-
-.sheet {
-    z-index: 10;
-    background: #e8eaef;
-    color: #eee;
-
-    h2 {
-        font-family: OswaldRegular, Sans-serif;
-        font-size: 30px;
-        font-weight: normal;
-        text-align: center;
-        text-transform: uppercase;
-    }
-
-    .app-section {
-        position: relative;
-        margin: 8px;
-        border: 1px solid #AAA;
-    }
-
-    .app-button {
-        margin: 0 auto;
-        height: 40px;
-        border-bottom: 1px solid #AAA;
-        line-height: 40px;
-        text-align: center;
-
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-
-        &:last-child {
-            border-bottom: none;
-        }
-
-        &.green {
-            background-color: #7F7;
-        }
-        &.red {
-            background-color: #F77;
-        }
-        &.blue {
-            background-color: #77F;
-        }
-        &.dark {
-            background-color: #444;
-        }
-    }
-
-    .app-input {
-        position: relative;
-        display: block;
-        padding: 10px 12px;
-        width: 100%;
-        background-color: transparent;
-        border: none;
-        border-bottom: 1px solid #AAA;
-        outline: none;
-        border-radius: 0;
-        line-height: 20px;
-        -webkit-appearance: none;
-    }
-    .app-section .app-input:last-child {
-        border-bottom: none;
-    }
-    .app-input,
-    .app-input * {
-        color: #555;
-        font-family: inherit;
-        font-size: inherit;
-    }
-    input.app-input {
-        height: 40px;
-    }
-    textarea.app-input {
-        height: 80px;
-        resize: none;
-    }
-    .app-input input,
-    .app-input textarea {
-        display: inline-block;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        background-color: none;
-        border: none;
-        outline: none;
-        line-height: inherit;
-        resize: none;
-        -webkit-appearance: none;
-    }
-    .app-input input {
-        height: 20px;
-    }
-    .app-input textarea {
-        height: 60px;
-    }
-
-
-    input.app-input {
-        height: 44px;
-        background: #FFF;
-        line-height: 24px;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
-    body.isAndroid input.app-input {
-        height: 48px;
-        line-height: 18px;
-    }
-    .app-section input.app-input {
-        border-bottom: none;
-    }
-    body.isAndroid .app-section input.app-input {
-        height: 40px;
-        line-height: 20px;
-    }
-    .app-input[type="search"] {
-        padding-left: 34px;
-        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACjElEQVR42r3Wz2sTQRjG8e2maW1rTYIoaPEgHqz/gD+KFi8VRb0pVPTi2UPNQRRCEHpQkCKIp0ilQg/BVqQKUi8q1lRzERQ0x3pQVKJIxTaxpql+DzkMD+xkNo1d+NBudt5535md3VnPdmQyGfP/FrSjC+trOhDxmnxo4k70I4lxzOA18riPYRzFFolvSvJBPMU8/los4w3S8JtRRCfGUZJEK3KuKiigV4pwHzl/43gYkLSKMhZRQsVsZ7T9jN1ShFPyCCahHVbwEiM4gyM4gRQe4Tu04DnskCLqFjACTf4Vg4gHxPo4gCfQ2HyY0e/BvIziIzY7LtgIpqC37YLrLIxJ8AK2SbBLIW+ln29ordfBdryXFZ2Eh7CLuBdVo4gyTmuhGjyA30byOexq5B2CKLIyC7fqBZ6V0U8jagkJ299jtHmWVXxJAsZq1xot4DD+GP3NYqOtgJQUkFllAQMoG/3l9WnSXS4p9yy7ys3suAzoOWK2gJMS8AKJBpP7uCj9PagXtBdFI+AH+mvXwhbQjbzslFfqPYYJ5OQ23IEPD2HeA6dkXyihz6WDFJblNTpkPN+BiWHO5E8ZyCvXytfhiwRXkZa2Qf0cRBG6F+yXWGsRhwL292nsRBei8NGKDmzCZePbQL1DPMw9TGJFR1IzgxtI4yqm8Av6LaDnOfSEmYlzWNKZCKJtAtrnEJcirNvqPnwK6tTyyfbM+F2vF9DmOhPmLfmABSzJVlvBIooYRQIeJiyFFlzXhJ73YQjXMYqbSOEYuqXtBtyTxLomtjrv8a7taswiJiy3bxYxr8mHLmYfWcua6JHQ5hcCP2BN3Eb7/8yva2LSSH4XsbVKbm5413AeCePamhYRRYv52z/AKK4/BRObOQAAAABJRU5ErkJggg==);
-        background-repeat: no-repeat;
-        background-position: 12px center;
-        -webkit-background-size: 16px 16px;
-        background-size: 16px 16px;
-    }
-    .app-input[type="search"].no-icon,
-    body.isAndroid .app-input[type="search"].no-icon-android,
-    body.isiOS .app-input[type="search"].no-icon-ios {
-        padding-left: 12px;
-        background-image: none;
-    }
-
-    .app-section,
-    .app-list > li,
-    .app-list > li.app-button,
-    .app-button,
-    .app-input {
-        border: none;
-    }
-
-    .app-section {
-        margin: 16px;
-        padding: 8px;
-        background: #FFF;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-        -webkit-border-radius: 6px;
-        border-radius: 6px;
-    }
-    .app-ios-7 .app-section {
-        border-bottom: none;
-    }
-    .app-section.app-button {
-        margin: 16px;
-        padding: 0;
-    }
-    p.app-section {
-        padding: 12px 16px;
-        color: #665;
-    }
-    .app-section > * {
-        margin: 8px 0 0;
-        -webkit-border-radius: 4px;
-        border-radius: 4px;
-    }
-    .app-section > :first-child {
-        margin-top: 0;
-    }
-}
-
-
-
-
-/* ************************* */
-/* DIALOG
-/* Based on App.js: https://github.com/kikinteractive/app
-/* ************************* */
-
-.dialog-container {
-    position: absolute;
-    z-index: 100;
-    top: 0;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: $widthLeftPanel;
-    background-color: rgba(0,0,0,0);
-    overflow: hidden;
-
-    opacity: 0;
-    visibility: hidden;
-
-    -webkit-transition: background 0.425s cubic-bezier(0.4,0.6,0.05,1), opacity 0.282s ease-in-out, visibility 0.425s ease-in-out;
-    transition: background 0.425s cubic-bezier(0.4,0.6,0.05,1), opacity 0.282s ease-in-out, visibility 0.425s ease-in-out;
-
-    .dialog {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        background-color: rgba(255,255,255,0.85);
-        border-top: 1px solid #FFF;
-        -webkit-box-shadow: 0 0 8px rgba(0,0,0,0.85);
-        box-shadow: 0 0 8px rgba(0,0,0,0.85);
-        color: #777;
-
-        -webkit-transform: translateY(110%);
-        transform: translateY(110%);
-        -webkit-transition: -webkit-transform 0.425s cubic-bezier(0.4,0.6,0.05,1);
-        transition: transform 0.425s cubic-bezier(0.4,0.6,0.05,1);
-
-        &.dark {
-            background-color: rgba(51,51,50,0.9);
-            border-top-color: #444;
-            color: #999;
-        }
-
-        .title {
-            position: relative;
-            margin-bottom: 8px;
-            padding: 16px 20px 0;
-            font-size: 18px;
-            font-weight: 600;
-            text-align: center;
-        }
-        .text {
-            margin-top: 8px;
-            padding: 0 20px 8px;
-            font-size: 16px;
-            font-weight: 400;
-            text-align: center;
-        }
-        .button {
-            height: 60px;
-            color: #17B;
-            font-size: 22px;
-            font-weight: 300;
-            line-height: 60px;
-            text-align: center;
-
-            &.ok {
-                color: #3C7;
-            }
-            &.cancel {
-                color: #E54;
-                body.isAndroid & {
-                    display: none;
-                }
-            }
-            body.isDesktop &:hover,
-            body:not(.isDesktop) &:active {
-                opacity: 0.5;
-            }
-        }
-        &.dark .button {
-            color: #F3F4F5;
-        }
-    }
-
-    &.show {
-        opacity: 1;
-        visibility: visible;
-        background-color: rgba(0,0,0,0.8);
-
-        .dialog {
-            -webkit-transform: translateY(0);
-            transform: translateY(0);
-        }
-    }
-
-    body.narrow & {
-        min-width: 100%;
-        max-width: 100%;
-    }
-}
-
-
-
-
-/* ************************* */
 /* GRIDLIST
 /* ************************* */
 
 .gridlist {
+    opacity: 1;
+    @include transition (opacity 0.5s ease-out);
 
-    .gridlist-item {
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
+    &.hide {
+        opacity: 0;
     }
 
-    .gridlist-title {
-        position: absolute;
-        bottom: 0;
-        margin: 0;
-        padding: 15px 20px;
-        font-family: RalewayLight, Sans-serif;
-        font-size: 18px;
-        font-weight: normal;
-        color: #fff;
+    .item {
+        overflow: hidden; /* Required because display: table with large image is buggy */
+    }
+}
+
+.gridlist-item {
+    cursor: pointer;
+    position: relative;
+    display: table;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    .gridlist-infos {
+        display: table-cell;
+        vertical-align: bottom;
+        padding: 30px 20px;
+
+        h3 {
+            margin: 0;
+            padding: 0;
+            font-family: RalewayLight, Sans-serif;
+            font-size: 18px;
+            font-weight: normal;
+            text-transform: uppercase;
+            color: #fff;
+
+            @include transform (translate3d(0,0,0));
+
+            -webkit-transition: -webkit-transform 0.35s;
+            transition: transform 0.35s;
+
+            &.bold {
+                font-family: RalewayExtraBold, Sans-serif;
+            }
+        }
+
+        p {
+            margin: 0;
+            padding: 0;
+            font-family: RalewayLight, Sans-serif;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #fff;
+
+            @include transform (translate3d(0,0,0));
+            @include transition-delay (0.15s);
+
+            -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+            transition: opacity 0.35s, transform 0.35s;
+        }
     }
 
     .gridlist-image {
+        $imageOverhang: 40px;
+
         z-index: -1;
         position: absolute;
         top: 0;
-        bottom: 0;
         left: 0;
-        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        /* calc() is not widely supported...
+        width: -webkit-calc(100% + #{$imageOverhang});
+        width: calc(100% + #{$imageOverhang});
+        @include transform (translate3d(-$imageOverhang,0,0));
+        */
+        width: 120%;
+        overflow: hidden;
+        opacity: 1;
+
+        @include transform (translate3d(-15%,0,0));
+        @include transition-delay (0.15s);
+
+        -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+        transition: opacity 0.35s, transform 0.35s;
+
+        &::before {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            opacity: 1;
+
+            @include transform (translate3d(0,100%,0));
+            -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+            transition: opacity 0.35s, transform 0.35s;
+        }
+    }
+
+        body.isDesktop &:hover,
+        body:not(.isDesktop) &:active {
+        .gridlist-infos {
+            h3 {
+                @include transform (translate3d(0,30px,0));
+            }
+
+            p {
+                opacity: 0;
+                @include transform (translate3d(0,40px,0));
+            }
+        }
+
+        .gridlist-image {
+            opacity: 0.7;
+            @include transform (translate3d(0,0,0));
+
+            &::before {
+                opacity: 1;
+                @include transform (translate3d(0,0,0));
+            }
+        }
     }
 }
 
@@ -972,43 +811,21 @@ white-space: normal;
 
 
 /* ************************* */
-/* SECTION DIAGONAL
+/* LOADING SPINNER
+/* lib/canvasSpinner
 /* ************************* */
 
-.section-diagonal {
-    position: relative;
-    padding: 10em 10%;
-    background: #2980b9;
-    color: #fff;
-    text-align: center;
-    z-index: 1;
-    padding-top: 6em;
-    background: #2072a7;
+.loading-spinner {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    margin: 0;
+    opacity: 0;
 
-    &::before,
-    &::after {
-        position: absolute;
-        content: '';
-        pointer-events: none;
-        top: 0;
-        left: -25%;
-        z-index: -1;
-        width: 150%;
-        height: 75%;
-        background: inherit;
-	-webkit-transform: rotate(-2deg);
-	transform: rotate(-2deg);
-	-webkit-transform-origin: 0 0;
-	transform-origin: 0 0;
-    }
+    @include transition (opacity 0.35s ease-out);
 
-    &::before {
-        height: 50%;
-        background: #116094;
-	-webkit-transform: rotate(-3deg);
-	transform: rotate(-3deg);
-	-webkit-transform-origin: 3% 0;
-	transform-origin: 3% 0;
+    &.show {
+        opacity: 1;
     }
 }
 

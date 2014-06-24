@@ -16,98 +16,96 @@ enyo.kind({
         "onAnimateFinish": "destroySheet"
     },
     components: [
-
-    {
-        kind: "FittableRows",
-        classes: "enyo-fit",
-        components: [
-
         {
-            kind: "onyx.Toolbar",
+            kind: "FittableRows",
+            classes: "enyo-fit",
             components: [
-
-            {
-                tag: "p",
-                content: "Inputs"
-            },
-            {
-                tag: "div",
-                classes: "toolbar-btn btn-sheet-close",
-                ontap: "hideSheet"
-            }
-            ]
-        },
-        {
-            kind: "enyo.Input",
-            type: "search",
-            classes: "app-input",
-            placeholder: "Rechercher...",
-            selectOnFocus: true
-        },
-        {
-            kind: "enyo.Scroller",
-            fit: true,
-            touch: true,
-            thumb: false,
-            horizontal: "hidden",
-            // classes: "enyo-fit",
-            components: [
-
-            {
-                classes: "app-section",
-                components: [
+                {
+                    kind: "onyx.Toolbar",
+                    components: [
+                        {
+                            tag: "p",
+                            content: "Inputs"
+                        },
+                        {
+                            tag: "div",
+                            classes: "toolbar-btn btn-sheet-close",
+                            ontap: "hideSheet"
+                        }
+                    ]
+                },
                 {
                     kind: "enyo.Input",
-                    type: "text",
+                    type: "search",
                     classes: "app-input",
-                    placeholder: "Champ texte...",
-                    selectOnFocus: true
-                }
-                ]
-            },
-            {
-                tag: "form",
-                classes: "app-section",
-                components: [
-                {
-                    kind: "enyo.Input",
-                    type: "text",
-                    classes: "app-input",
-                    placeholder: "Sujet...",
+                    placeholder: "Rechercher...",
                     selectOnFocus: true
                 },
                 {
-                    kind: "enyo.TextArea",
-                    type: "text",
-                    classes: "app-input",
-                    placeholder: "Message...",
-                    selectOnFocus: true
+                    kind: "enyo.Scroller",
+                    fit: true,
+                    touch: true,
+                    thumb: false,
+                    horizontal: "hidden",
+                    // classes: "enyo-fit",
+                    components: [
+                        {
+                            classes: "app-section",
+                            components: [
+                                {
+                                    kind: "enyo.Input",
+                                    type: "text",
+                                    classes: "app-input",
+                                    placeholder: "Champ texte...",
+                                    selectOnFocus: true
+                                }
+                            ]
+                        },
+                        {
+                            tag: "form",
+                            classes: "app-section",
+                            components: [
+                                {
+                                    kind: "enyo.Input",
+                                    type: "text",
+                                    classes: "app-input",
+                                    placeholder: "Sujet...",
+                                    selectOnFocus: true
+                                },
+                                {
+                                    kind: "enyo.TextArea",
+                                    type: "text",
+                                    classes: "app-input",
+                                    placeholder: "Message...",
+                                    selectOnFocus: true
+                                },
+                                {
+                                    classes: "app-button dark",
+                                    content: "Envoyer",
+                                    ontap: "hideSheet"
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
-                    classes: "app-button dark",
-                    content: "Envoyer",
-                    ontap: "hideSheet"
+                    tag: "section",
+                    classes: "diagonal-divider",
+                    components: [
+                        {
+                            tag: "a",
+                            classes: "welcome-title",
+                            content: "Bienvenue",
+                            ontap: "hideSheet"
+                        }
+                    ]
                 }
-                ]
-            },
-            {
-                tag: "section",
-                classes: "section-diagonal",
-                components: [
-                {
-                    tag: "p",
-                    content: "Bienvenue"
-                }
-                ]
-            }
             ]
         }
-        ]
-    }
     ],
     showSheet: function(inSender, inEvent) {
         if (this.hasNode()) {
-            $(this.node).find( 'input, textarea' ).each(function(){
+            $(this.node).find('input, textarea').each(function() {
                 this.disabled = false;
             });
 
@@ -118,7 +116,7 @@ enyo.kind({
     },
     hideSheet: function(inSender, inEvent) {
         if (this.hasNode()) {
-            $(this.node).find( 'input, textarea' ).each(function(){
+            $(this.node).find('input, textarea').each(function() {
                 this.disabled = true;
             });
 

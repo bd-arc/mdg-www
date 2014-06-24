@@ -7,25 +7,28 @@
 enyo.kind({
     name: "mdg.Application",
     kind: "enyo.Application",
-    view: "GlobalView"
+    view: "Application"
 });
 
 
 enyo.ready(function() {
-    var bodyClass;
+    var OSClass, OSVersionClass;
 
     if ( enyo.platform.android ) {
-        bodyClass = 'isAndroid';
+        OSClass = 'isAndroid';
     } else if ( enyo.platform.ios ) {
-        bodyClass = 'isiOS';
+        OSClass = 'isiOS';
     } else {
-        bodyClass = 'isDesktop';
+        OSClass = 'isDesktop';
     }
+
+    OSVersionClass = 'os-version-' + enyo.platform[enyo.platform.platformName].toString().replace('.', '_');
 
     // This class will be used in CSS
     // jQuery( 'body' ).addClass( bodyClass );
     // document.body.className += ' ' + bodyClass;
-    document.body.classList.add(bodyClass);
+    document.body.classList.add(OSClass);
+    document.body.classList.add(OSVersionClass);
 
     // Render the app
     new mdg.Application({

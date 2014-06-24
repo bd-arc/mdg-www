@@ -1,12 +1,11 @@
 // From https://github.com/enyojs/sampler
 
 enyo.kind({
-    name: "GlobalView",
+    name: "Application",
     classes: "app enyo-unselectable",
     samples: [],
     handlers: {
         onresize: "resized",
-        // onForceResize: "triggerResized",
         onFullscreen: "toggleFullScreen",
         onNavBack: "navBack",
         onContentNavBack: "contentNavBack",
@@ -14,71 +13,67 @@ enyo.kind({
         onOpenDialog: "openDialog"
     },
     components: [
-
-    {
-        kind: "InputSheet",
-        name: "firstScreen",
-        value: 0,
-        destroyOnDisappearance: true
-    },
-    {
-        kind: "Panels",
-        name: "mainPanels",
-        classes: "panels enyo-fit",
-        arrangerKind: "CollapsingArranger",
-        draggable: false,
-        components: [
         {
-            kind: "MainViews",
-            name: "navPanels",
-            classes: "mainview",
-            onTransitionFinish: "navChanged"
+            kind: "Signals",
+            ondeviceready: "deviceReady",
+            ononline: "online",
+            onoffline: "offline",
+            onresume: "resume",
+            onpause: "pause",
+            backbutton: "backbutton"
         },
-
         {
-            kind: "ContentViews",
-            name: "contentPanels",
-            classes: "contentview"
+            kind: "InputSheet",
+            name: "firstScreen",
+            value: 0,
+            destroyOnDisappearance: true
+        },
+        {
+            kind: "Panels",
+            name: "mainPanels",
+            classes: "panels enyo-fit",
+            arrangerKind: "CollapsingArranger",
+            draggable: false,
+            components: [
+                {
+                    kind: "MainViews",
+                    name: "navPanels",
+                    classes: "mainview"
+                },
+                {
+                    kind: "ContentViews",
+                    name: "contentPanels",
+                    classes: "contentview"
+                }
+            ]
         }
-        ]
-    }
     ],
     create: function() {
         this.inherited(arguments);
 
         // See gallery example to have an idea about how to handle hash
-        window.onhashchange = this.bindSafely("hashChange");
+        // window.onhashchange = this.bindSafely("hashChange");
 
         this.toggleNarrowClass();
 
         this.$.navPanels.pushView({
-            kind:"SimpleView",
+            kind: "SimpleView",
             firstView: true
         });
         this.$.contentPanels.pushView({
             kind: "RecipeView"
         });
+
+        // WARNING: this one is just there to populate the first view
+        this.$.navPanels.triggerHandler("onTransitionFinish");
     },
     rendered: function() {
         this.inherited(arguments);
     },
-    toggleFullScreen: function() {
-        this.$.mainPanels.setIndex(this.$.mainPanels.index ? 0 : 1);
-    },
-    toggleNarrowClass: function() {
-        var narrowClass = "narrow";
-        // Same condition as Panels.narrowFitChanged()
-        if (this.$.mainPanels.narrowFit && enyo.Panels.isScreenNarrow()) {
-            document.body.classList.add(narrowClass);
-        } else {
-            document.body.classList.remove(narrowClass);
-        }
-
-    },
     resized: function(inSender, inEvent) {
         this.log();
-        this.toggleNarrowClass();
         this.$.mainPanels.narrowFitChanged();
+        this.toggleNarrowClass();
         this.toggleMainPanels();
     },
     navChanged: function() {
@@ -88,13 +83,15 @@ enyo.kind({
         this.$.navPanels.popView();
     },
     contentNavBack: function(inSender, inEvent) {
-        this.$.mainPanels.setIndex(0);
+        if (this.$.mainPanels.index !== 0) {
+            this.$.mainPanels.setIndex(0);
+        }
     },
     pushContentView: function() {
+        this.toggleMainPanels(true);
         this.$.contentPanels.pushView({
             kind: "RecipeView"
         });
-        this.toggleMainPanels(true);
     },
     toggleMainPanels: function(transition) {
         var index = enyo.Panels.isScreenNarrow() ? 1 : 0;
@@ -103,6 +100,18 @@ enyo.kind({
             this.$.mainPanels.setIndex(index);
         } else {
             this.$.mainPanels.setIndexDirect(index);
+        }
+    },
+    toggleFullScreen: function() {
+        this.$.mainPanels.setIndex(this.$.mainPanels.index ? 0 : 1);
+    },
+    toggleNarrowClass: function() {
+        var narrowClass = "narrow";
+        // Exact same condition as Panels.narrowFitChanged() to avoid issues
+        if (this.$.mainPanels.narrowFit && enyo.Panels.isScreenNarrow()) {
+            document.body.classList.add(narrowClass);
+        } else {
+            document.body.classList.remove(narrowClass);
         }
     },
     openDialog: function(inSender, inEvent) {
@@ -118,11 +127,11 @@ enyo.kind({
 
         return true;
     },
-
-
-
     openExternal: function() {
         window.open(this.externalURL, "_blank");
+    },
+    hashChange: function() {
+        // var n = this.getHashComponentName();
     },
     getHashComponentName: function() {
         return window.location.hash.slice(1);
@@ -130,14 +139,35 @@ enyo.kind({
     setHashComponentName: function(inName) {
         window.location.hash = inName;
     },
-    hashChange: function() {
-    // var n = this.getHashComponentName();
+    getRandomInt: function(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     },
-
-
-
     alert: function() {
         alert('test');
+    },
+    // PhoneGap events
+    deviceReady: function() {
+        this.log();
+    },
+    online: function() {
+        this.log();
+    },
+    offline: function() {
+        this.log();
+    },
+    resume: function() {
+        this.log();
+    },
+    pause: function() {
+        this.log();
+    },
+    backbutton: function() {
+        this.log();
+        if (enyo.Panels.isScreenNarrow() && this.$.mainPanels.index !== 0) {
+            this.contentNavBack();
+        } else {
+            this.navBack();
+        }
     }
 });
 
@@ -148,11 +178,23 @@ enyo.kind({
     kind: "Panels",
     arrangerKind: "CarouselArranger",
     draggable: false,
+    events: {
+        // This event will waterfall down to warn components
+        onUpdateContent: ""
+    },
     handlers: {
-        onTransitionFinish: "destroyAfter"
+        onTransitionFinish: "transitionFinished"
     },
     currView: -1,
+    transitionFinished: function(inSender, inEvent) {
+        this.log(inEvent.fromIndex + ' -> ' + inEvent.toIndex);
+        // Destroy subsequent tiles
+        this.destroyAfter();
+        // Warn data-aware components of the current panel
+        this.getActive().waterfall("onUpdateContent", inEvent);
+    },
     destroyAfter: function() {
+        this.log();
         // Suppress event while in the process of popping panels
         if (this.suppressFinish) {
             return true;
@@ -163,8 +205,8 @@ enyo.kind({
         if (last > this.currView) {
             this.suppressFinish = true;
             // Turn off animation, since panels will jump while destroying
-            this.saveAnimate = this.getAnimate();
-            this.setAnimate(false);
+            //this.saveAnimate = this.getAnimate();
+            //this.setAnimate(false);
             // Pop any views in excess (to the right) of the current
             while (last > this.currView) {
                 var view = this.getPanels()[last];
@@ -172,8 +214,8 @@ enyo.kind({
                 last--;
             }
             // Go directly back to the current view and restore animation
-            this.setIndexDirect(this.currView);
-            this.setAnimate(this.saveAnimate);
+            //this.setIndexDirect(this.currView); // This will trigger another 'onTransitionFinish'...
+            //this.setAnimate(this.saveAnimate);
             this.suppressFinish = false;
         }
     },
@@ -226,10 +268,11 @@ enyo.kind({
     name: "MainViews",
     kind: "ViewStack",
     classes: "enyo-fit",
-    envents: {
+    events: {
         onUpdateHistory: ""
     },
     handlers: {
+        // At the moment, this event is triggered by the SimpleView kind
         onPushView: "showView"
     },
     showView: function(inSender, inEvent) {
@@ -241,26 +284,25 @@ enyo.kind({
         return true; // Stop event propagation
     },
     lazyViews: {
-        "compose": {
+        chuisyExample: {
             kind: "ComposeChu",
             name: "compose",
             onDone: "composeChuDone"
         },
-        "blocks": {
+        blocks: {
             kind: "BlocksMasonry",
             name: "blocks",
             onDone: "chuViewDone"
         },
-        "inputSheet": {
+        inputSheet: {
             kind: "InputSheet",
-            name: "inputSheet",
-            onDone: "chuViewDone"
+            name: "inputSheet"
         },
-        "dialog": {
+        dialog: {
             kind: "Dialog",
             name: "dialog"
         },
-        "view": {
+        view: {
             kind: "SimpleView"
         }
     }
@@ -274,9 +316,6 @@ enyo.kind({
     arrangerKind: "CardArranger",
     draggable: false,
     classes: "enyo-fit",
-    handlers: {
-    // onTransitionFinish: "destroyAfter"
-    },
     pushView: function(viewKind, viewOpts) {
         // We always keep only one view
         this.destroyComponents();
@@ -284,6 +323,9 @@ enyo.kind({
         c.render();
         this.reflow();
         return c;
+    },
+    popView: function() {
+        this.destroyComponents();
     }
 });
 

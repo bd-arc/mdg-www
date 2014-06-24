@@ -1,5 +1,5 @@
 enyo.depends(
-    "GlobalView.js",
+    "Application.js",
     "RecipeView.js",
     "SimpleView.js"
 );

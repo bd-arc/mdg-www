@@ -129,7 +129,7 @@ $_1em: 16; // px
 
 // ----- box-shadow
 
-@mixin box-shadow ($x: 0, $y: 3px, $blur: 10px, $color: rgba(0, 0, 0, .6), $direction: 180, $strength: 5) {
+@mixin box-shadow ($x: 0, $y: 3px, $blur: 10px, $color: rgba(0, 0, 0, .6)) {
     -webkit-box-shadow: $x $y $blur $color;
     -moz-box-shadow: $x $y $blur $color;
     -ms-box-shadow: $x $y $blur $color;
@@ -139,6 +139,10 @@ $_1em: 16; // px
     // Microsoft
     //-ms-filter: ~"progid:DXImageTransform.Microsoft.Shadow(color=#{$color}, direction=#{$direction}, strength=#{$strength})";
     //filter: ~"progid:DXImageTransform.Microsoft.Shadow(color=#{$color}, direction=#{$direction}, strength=#{$strength})";
+}
+
+@mixin box-shadow-inset ($x: 0, $y: 3px, $blur: 10px, $color: rgba(0, 0, 0, .6)) {
+    @include box-shadow (inset $x $y $blur $color);
 }
 
 @mixin no-box-shadow () {
@@ -189,18 +193,69 @@ $_1em: 16; // px
     background-size: $args;
 }
 
+// ----- transform
+
+@mixin transform ($args...) {
+    -webkit-transform: $args;
+    -moz-transform: $args;
+    -ms-transform: $args;
+    -o-transform: $args;
+    transform: $args;
+}
+
+@mixin transform-origin ($args...) {
+    -webkit-transform-origin: $args;
+    -moz-transform-origin: $args;
+    -ms-transform-origin: $args;
+    -o-transform-origin: $args;
+    transform-origin: $args;
+}
+
+@mixin transform-style ($args...) {
+    -webkit-transform-style: $args;
+    -moz-transform-style: $args;
+    -ms-transform-style: $args;
+    -o-transform-style: $args;
+    transform-style: $args;
+}
+
 // ----- transition
 
-@mixin __transition ($args...) {
+@mixin transition ($args...) {
     -webkit-transition: $args;
     -moz-transition: $args;
     -ms-transition: $args;
     -o-transition: $args;
     transition: $args;
 }
+/* This kind of transition is too simple for our needs, as we might pass multiple properties to it
+@mixin transition ($type: all, $duration: 0.3s, $easing: ease-out, $delay: 0s) {
+    @include __transition ($type $duration $easing $delay);
+}
+*/
 
-@mixin transition ($type: all, $delay: 0.3s, $easing: ease-out) {
-    @include __transition ($type $delay $easing);
+@mixin transition-duration ($args...) {
+    -webkit-transition-duration: $args;
+    -moz-transition-duration: $args;
+    -ms-transition-duration: $args;
+    -o-transition-duration: $args;
+    transition-duration: $args;
+}
+
+@mixin transition-timing-function ($args...) {
+    -webkit-transition-timing-function: $args;
+    -moz-transition-timing-function: $args;
+    -ms-transition-timing-function: $args;
+    -o-transition-timing-function: $args;
+    transition-timing-function: $args;
+}
+
+@mixin transition-delay ($args...) {
+    -webkit-transition-delay: $args;
+    -moz-transition-delay: $args;
+    -ms-transition-delay: $args;
+    -o-transition-delay: $args;
+    transition-delay: $args;
 }
 
 // ----- text-shadow
@@ -210,6 +265,16 @@ $_1em: 16; // px
 }
 @mixin no-text-shadow () {
     @include text-shadow(0, 0, 0);
+}
+
+// ----- calc
+
+@mixin height-calc ($args...) {
+    height: -webkit-calc(#{$args});
+    height: -moz-calc(#{$args});
+    height: -ms-calc(#{$args});
+    height: -o-calc(#{$args});
+    height: calc(#{$args});
 }
 
 // ----- linear-gradient

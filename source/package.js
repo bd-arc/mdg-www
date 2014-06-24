@@ -8,8 +8,8 @@ enyo.depends(
     "style",
 
     "$lib/jquery",
-    "$lib/jquery.visible",
-    // "$lib/canvasSpinner",
+    // "$lib/jquery.visible",
+    "$lib/canvasSpinner",
     "$lib/smooth-panels",
 
     // Model and data definitions
@@ -18,6 +18,10 @@ enyo.depends(
     "views",
     // Custom kinds
     "kinds",
+
+    // TESTING
+    // "__samplerApp.js",
+
     // Include our default entry point
     "app.js"
 );
